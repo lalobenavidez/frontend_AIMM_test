@@ -40,16 +40,16 @@ from datetime import datetime, timezone
 def upsert_user(supabase_client, usr):
     """
     Si el email ya existe → actualiza last_access.
-    Si no existe → crea el registro con created_at y last_access.
+    Si no existe → crea el registro con created_at automático y last_access.
     """
     supabase_client.table("usuarios").upsert(
         {
             "email": usr["email"],
-            # 🚩 si añadiste columna id con auth.uid():  "id": usr["id"],
-            "created_at": datetime.now(timezone.utc).isoformat(),
+            # Si estás usando auth.uid() como id, incluye esta línea:
+            # "id": usr["id"],
             "last_access": datetime.now(timezone.utc).isoformat(),
         },
-        on_conflict="email"          # clave única → email
+        on_conflict="email"  # Usa email como campo único para upsert
     ).execute()
 
 upsert_user(supabase, user)
