@@ -7,3 +7,4 @@ numpy
 investpy
 alpha_vantage
 streamlit_supabase_auth
+supabase
