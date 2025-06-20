@@ -65,7 +65,7 @@ def extraer_conclusion_json(text):
 
 # ============ FIN DE SECCIÓN NUEVA ============
 # Configuración general
-st.set_page_config(page_title="Análisis de MARKET MAP AI", layout="wide")
+st.set_page_config(page_title="Developer", layout="wide")
 #openai.api_key = st.secrets["OPENAI_API_KEY"]
 # Inicializa ticker seleccionado
 if 'selected_ticker' not in st.session_state:
