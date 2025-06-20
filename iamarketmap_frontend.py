@@ -31,7 +31,7 @@ if not session:
 
 # 🔌 Cliente Supabase para guardar o leer datos si lo necesitas
 supabase = create_client(st.secrets["SUPABASE_URL"], st.secrets["SUPABASE_KEY"])
-user = session.user
+user = session["user"]
 st.success(f"Bienvenido, {user.email}")
 
 
