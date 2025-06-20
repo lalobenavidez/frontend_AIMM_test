@@ -268,7 +268,7 @@ div[role="radiogroup"] > label > div:first-child {
 # =====================
 # Encabezado y selección
 # =====================
-st.title("AI MARKET MAP Analysis")
+st.title("Developer")
 
 # ✅ Lista simplificada de tickers + cambios ya formateados para mostrar en el dropdown
 ticker_labels = [
