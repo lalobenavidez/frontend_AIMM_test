@@ -34,6 +34,28 @@ supabase = create_client(st.secrets["SUPABASE_URL"], st.secrets["SUPABASE_KEY"])
 user = session["user"]
 st.success(f"Bienvenido, {user['email']}")
 
+# ──── ✨ Registrar / actualizar usuario en tabla "usuarios" ────
+from datetime import datetime, timezone
+
+def upsert_user(supabase_client, usr):
+    """
+    Si el email ya existe → actualiza last_access.
+    Si no existe → crea el registro con created_at y last_access.
+    """
+    supabase_client.table("usuarios").upsert(
+        {
+            "email": usr["email"],
+            # 🚩 si añadiste columna id con auth.uid():  "id": usr["id"],
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "last_access": datetime.now(timezone.utc).isoformat(),
+        },
+        on_conflict="email"          # clave única → email
+    ).execute()
+
+upsert_user(supabase, user)
+# ───────────────────────────────────────────────────────────────
+
+
 
 def run_app():
 
