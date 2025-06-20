@@ -1,0 +1,8 @@
+streamlit
+pandas
+openai
+requests
+matplotlib
+numpy
+investpy
+alpha_vantage
