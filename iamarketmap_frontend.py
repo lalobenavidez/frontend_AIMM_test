@@ -23,7 +23,6 @@ session = login_form(
     url = st.secrets["SUPABASE_URL"],
     apiKey = st.secrets["SUPABASE_KEY"],
     providers = ["google"],  # Puedes incluir "github", "facebook" si lo activas en Supabase
-    key="login_form_dev"  # ✅ clave única
 )
 
 # ✋ Bloquea la app si no ha iniciado sesión
