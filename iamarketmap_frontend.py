@@ -599,6 +599,11 @@ def run_app():
     </div>
     """, unsafe_allow_html=True)
 
+    
+    if 'ultimo_analisis' in st.session_state and st.session_state['ultimo_analisis']:
+        data_json = st.session_state['ultimo_analisis'][0]
+    else:
+        data_json = None
 
 
     # --- Graficar los datos reales con Plotly ---
