@@ -41,7 +41,7 @@ def run_app():
     st.markdown("""
     <div style="display: flex; justify-content: center; margin-bottom: 25px;">
         <a href="https://aimarketmap.net" target="_blank">
-            <img src="https://ibb.co/prjgC28h" width="180">
+            <img src="<a href="https://imgbb.com/"><img src="https://i.ibb.co/zTFvvtzr/Copy-of-Logo.png" alt="Copy-of-Logo" border="0"></a>" width="180">
         </a>
     </div>
     """, unsafe_allow_html=True)
