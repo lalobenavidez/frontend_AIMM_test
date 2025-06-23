@@ -6,6 +6,7 @@ matplotlib
 numpy
 investpy
 alpha_vantage
-streamlit_supabase_auth
 supabase
 plotly
+streamlit_supabase_auth>=2.0.5
+
