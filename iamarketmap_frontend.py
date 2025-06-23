@@ -638,11 +638,10 @@ def run_app():
             yaxis=dict(tickfont=dict(size=10)),
             height=400,
             plot_bgcolor="#1e2533",
-            paper_bgcolor="#1e2533"    
-
+            paper_bgcolor="#1e2533"
+        )
         fig.update_xaxes(
             tickformat="%b %d\n%H:%M"     # ✅ eje X: fecha y hora en 2 líneas
-            )
         )
 
         st.plotly_chart(fig, use_container_width=True)
