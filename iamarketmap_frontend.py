@@ -13,7 +13,7 @@ import requests
 import plotly.express as px
 
 # ✅ Este debe ir antes de cualquier otra función de Streamlit
-st.set_page_config(page_title="Developer", layout="wide")   # ← este es el único cambio clave
+st.set_page_config(page_title="A.I Market Map", layout="wide")   # ← este es el único cambio clave
 
 # 🔐 Importa módulos de autenticación Supabase
 from streamlit_supabase_auth import login_form, logout_button
@@ -295,7 +295,7 @@ def run_app():
     # =====================
     # Encabezado y selección
     # =====================
-    st.title("Developer")
+    st.title("A.I. Market Map")
 
     # ✅ Lista simplificada de tickers + cambios ya formateados para mostrar en el dropdown
     ticker_labels = [
