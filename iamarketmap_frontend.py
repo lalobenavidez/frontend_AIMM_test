@@ -10,6 +10,7 @@ import datetime
 from alpha_vantage.timeseries import TimeSeries
 import re
 import requests
+import plotly.express as px
 
 # ✅ Este debe ir antes de cualquier otra función de Streamlit
 st.set_page_config(page_title="Developer", layout="wide")   # ← este es el único cambio clave
@@ -600,17 +601,7 @@ def run_app():
 
 
 
-    # --- Graficar los datos reales del backend ---
-    import matplotlib.dates as mdates
-    from matplotlib.dates import DateFormatter, HourLocator, DayLocator
-
-    # Asegura que haya datos antes de intentar acceder
-    if 'ultimo_analisis' in st.session_state and st.session_state['ultimo_analisis']:
-        data_json = st.session_state['ultimo_analisis'][0]
-    else:
-        data_json = None  # o un dict vacío si lo necesitas así
-    selected_interval = st.session_state.get("interval_radio", "1D")
-
+    # --- Graficar los datos reales con Plotly ---
     if data_json:
         df_real = pd.DataFrame(data_json)
 
@@ -624,32 +615,26 @@ def run_app():
             st.stop()
 
         df_real['datetime'] = pd.to_datetime(df_real['datetime'])
-        df_real.set_index('datetime', inplace=True)
-        df_real.sort_index(inplace=True)  # ✅ Asegura orden temporal
+        df_real.sort_values("datetime", inplace=True)
 
-        # Gráfico
-        fig, ax = plt.subplots(figsize=(8.5, 4))
-        ax.plot(df_real.index, df_real['Close'], color='#3b82f6', linewidth=2.7)
+        fig = px.line(
+            df_real,
+            x="datetime",
+            y="Close",
+            title=f"{st.session_state['selected_ticker']} - {selected_interval}",
+            template="plotly_dark",
+            labels={"Close": "Precio", "datetime": "Fecha"}
+        )
+        fig.update_traces(line=dict(width=2.7, color="#3b82f6"))
 
-        # Estética
-        ax.set_facecolor('#1e2533')
-        fig.patch.set_facecolor('#1e2533')
-        for spine in ax.spines.values():
-            spine.set_color('#1e293b')
-        ax.tick_params(colors='#94a3b8', labelsize=7)
-        ax.grid(False)
+        fig.update_layout(
+            margin=dict(t=40, b=30, l=0, r=0),
+            xaxis=dict(tickfont=dict(size=10)),
+            yaxis=dict(tickfont=dict(size=10)),
+            height=400
+        )
 
-        # Eje X dinámico
-        if selected_interval in ["15M", "1H"]:
-            ax.xaxis.set_major_locator(HourLocator(interval=1))
-            ax.xaxis.set_major_formatter(DateFormatter('%d %b\n%H:%M'))
-        else:
-            ax.xaxis.set_major_locator(DayLocator(interval=1))
-            ax.xaxis.set_major_formatter(DateFormatter('%d %b'))
-
-        fig.autofmt_xdate()
-        plt.yticks(fontsize=7)
-        st.pyplot(fig)
+        st.plotly_chart(fig, use_container_width=True)
     else:
         st.warning("No hay datos disponibles para graficar aún.")
 
