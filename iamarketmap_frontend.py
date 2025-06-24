@@ -640,6 +640,29 @@ def run_app():
         )
         fig.update_traces(line=dict(width=2.7, color="#3b82f6"))
 
+        # Solo si target y stop son números válidos
+        if target is not None and stop is not None:
+            # Línea del TARGET
+            fig.add_hline(
+                y=target,
+                line_dash="dash",
+                line_color="#22d3ee",          # mismo color que usas en el mini-gráfico
+                annotation_text=f"Target ${target:.2f}",
+                annotation_position="top left",
+                annotation_font_color="white"
+            )
+
+            # Línea del STOP
+            fig.add_hline(
+                y=stop,
+                line_dash="dash",
+                line_color="#ef4444",
+                annotation_text=f"Stop ${stop:.2f}",
+                annotation_position="bottom left",
+                annotation_font_color="white"
+            )
+
+
         fig.update_layout(
             margin=dict(t=40, b=30, l=0, r=0),
             xaxis=dict(tickfont=dict(size=10)),
@@ -664,5 +687,5 @@ logout_button()
 
 #comandos de actuallizacion en visul termina
 #git add iamarketmap_frontend.py
-#git commit -m "user portal login signup"
+#git commit -m "stop y target"
 #git push
