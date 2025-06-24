@@ -561,7 +561,7 @@ def run_app():
                 st.markdown(
                     f"""
                     <div style="background-color:#1e293b; padding:18px 16px 10px 18px; border-radius:12px; margin-top:22px;">
-                        <h4 style="color:white; margin-bottom:6px;">⚖️ Evaluuación de Riesgo/Beneficio (Recomendable tener un valor mayor a 1.0)</h4>
+                        <h4 style="color:white; margin-bottom:6px;">⚖️ Evaluación de Riesgo/Beneficio (Recomendable tener un valor mayor a 1.0)</h4>
                         <p style="color:#fbbf24; font-size:21px; font-weight:700; margin-bottom:0;">{rr_ratio}</p>
                     </div>
                     """,
